@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <style>
+        body{
+            background-image: url(disbamboo.png);
+            background-repeat: repeat;
+            background-size: 100%;
+            }
+            #result{
+                color: red;
+                animation: rotate 3s infinite;
+            }
+
+            #result2{
+                color: red;
+                animation: rotate 3s infinite;
+            }
+            @keyframes rotate {
+                0% {color: orange; font-size: 75px;}
+                50% {color: red; font-size: 50px;}
+                100% {color: orange; font-size: 75px;}
+            }
+    </style>
+    <div class="container-fluid mt-3 d-flex align-items-center justify-content-center">
+    <form>
+    <div class=" mb-1 justify-content-center align-items-center d-flex">
+        <input id="weight" type="number" placeholder="Weight(kg)">
+    </div>
+    <div class="mb-1 justify-content-center align-items-center d-flex">
+        <input id="height" type="number" placeholder="Height(cm)">
+    </div>
+    <div class="justify-content-center align-items-center d-flex">
+        <input id="gomb" type="button" value="Calculate" onclick="calculate()">
+    </div>
+    <div class=" mt-1 d-flex align-items-center justify-content-center">
+        <div id="result"></div>
+    </div>
+    <div class="d-flex align-items-center justify-content-center">
+        <div id="result2"></div>
+    </div>    
+    </form>
+</div>
+    <script>
+        const rules=[
+            {min:0, max:18.5, categ:'underweight', emoji:'💀'},
+            {min:18.5, max:25, categ:'normal', emoji:'😎'},
+            {min:25, max:30, categ:'overweight', emoji:'😒'},
+            {min:30, max:35, categ:'obese', emoji:'🚚'},
+            {min:35, max:1000, categ:'extremely obese', emoji: '🐢'}
+        ]
+        function calculate(){
+            const suly = document.getElementById('weight').value
+            const magassag = document.getElementById('height').value
+            let bmi = (suly/(magassag/100)**2).toFixed(2)
+            let result= rules.find(obj=>bmi>obj.min && bmi<=obj.max)
+            document.getElementById('result').innerHTML = `BMi: ${bmi}`;
+            document.getElementById('result2').innerHTML = `Category: ${result.categ}${result.emoji}`;
+        }
+        
+
+
+
+        
+    </script>
+</body>
+</html>
